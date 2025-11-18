@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using JSAM;
 using TMPro;
 using UI.Models.Game;
 using UI.Views.Abstraction;
@@ -19,6 +20,7 @@ namespace UI.Views.Game
         public override async Task Show()
         {
             await Task.Delay(1000);
+            AudioManager.PlaySound(AudioLibrarySounds.Popup);
             await base.Show();
         }
         

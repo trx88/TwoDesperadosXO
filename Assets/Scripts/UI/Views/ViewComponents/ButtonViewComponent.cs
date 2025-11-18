@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using JSAM;
 using TMPro;
 using UI.Views.Abstraction;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace UI.Views.ViewComponents
         
         private void OnButtonClicked()
         {
+            AudioManager.PlaySound(AudioLibrarySounds.ButtonClick);
             ButtonClicked?.Invoke();
         }
 

@@ -1,6 +1,5 @@
 using Actions.DataActions;
 using Repository.DataRepositories.RepositoryFactories.Factories;
-using Services;
 using UI.Models.Game;
 using UI.Models.Settings;
 using UI.Models.Stats;
@@ -16,8 +15,6 @@ namespace GameContexts
         
         public InMemoryRepositoryFactory InMemoryRepositoryFactory { get; private set; }
         public PlayerPrefsRepositoryFactory PlayerPrefsRepositoryFactory { get; private set; }
-        
-        // public SceneService SceneService { get; private set; }
 
         private void Awake()
         {
@@ -32,8 +29,6 @@ namespace GameContexts
             
             SetupInMemoryRepositoryFactory();
             SetupPlayerPrefsRepositoryFactory();
-
-            // SceneService = new SceneService();
             
             Debug.Log("GameContext initialized.");
         }

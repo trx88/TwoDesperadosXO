@@ -7122,6 +7122,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
   m_AspectMode: 2
   m_AspectRatio: 0.8659176
+--- !u!1001 &2138791910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2133915684049951699, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: preloadedLibraries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133915684049951699, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: 'preloadedLibraries.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bf8cda0130950d35e93c9c536dde528c, type: 2}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.05814
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406104, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502563656087406110, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5622182eb5c80d4090797d80bbf7abc, type: 3}
 --- !u!1 &2146987814
 GameObject:
   m_ObjectHideFlags: 0
@@ -7771,6 +7836,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2138791910}
   - {fileID: 704287486}
   - {fileID: 1826124834}
   - {fileID: 838753102}

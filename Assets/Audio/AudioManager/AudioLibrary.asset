@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2204bf128383ced4f8a374a536984a4c, type: 3}
+  m_Name: AudioLibrary
+  m_EditorClassIdentifier: com.Brogrammist.JSAM::JSAM.AudioLibrary
+  soundCategories:
+  - UI
+  musicCategories:
+  - 
+  Sounds:
+  - {fileID: 11400000, guid: ab943c31631c5839c893d0c79358728a, type: 2}
+  - {fileID: 11400000, guid: 93f998e5898b85b95af7003749e8526c, type: 2}
+  - {fileID: 11400000, guid: 912346fa7cee84d31acede13142bc398, type: 2}
+  - {fileID: 11400000, guid: fb1bce66b8e5e2f90b21b054cbd58589, type: 2}
+  - {fileID: 11400000, guid: a0947e1e13f54208e97597953d620ddf, type: 2}
+  Music: []
+  useCustomNames: 0
+  generatedName: AudioLibrary
+  musicEnum: AudioLibraryMusic
+  musicEnumGenerated: AudioLibraryMusic
+  musicNamespace: 
+  musicNamespaceGenerated: 
+  soundEnum: AudioLibrarySounds
+  soundEnumGenerated: AudioLibrarySounds
+  soundNamespace: 
+  soundNamespaceGenerated: 
+  soundCategoriesToList:
+  - name: UI
+    files:
+    - {fileID: 11400000, guid: ab943c31631c5839c893d0c79358728a, type: 2}
+    - {fileID: 11400000, guid: 93f998e5898b85b95af7003749e8526c, type: 2}
+    - {fileID: 11400000, guid: 912346fa7cee84d31acede13142bc398, type: 2}
+    - {fileID: 11400000, guid: fb1bce66b8e5e2f90b21b054cbd58589, type: 2}
+    - {fileID: 11400000, guid: a0947e1e13f54208e97597953d620ddf, type: 2}
+    foldout: 1
+  musicCategoriesToList:
+  - name: 
+    files: []
+    foldout: 1

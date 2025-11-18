@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using JSAM;
 using UI.StateMachine;
 using UI.ViewsModels.Abstraction;
 using UI.ViewsModels.Factory;
@@ -41,6 +42,7 @@ namespace GameContexts
             CreateSceneViewModels();
             InitializeStateMachine();
             
+            AudioManager.PlayMusic(AudioLibraryMusic.BackgroundMusic);
             Debug.Log("SceneContext initialized.");
         }
         

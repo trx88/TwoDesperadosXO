@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using JSAM;
 using UI.Models.Game;
 using UI.Views.Abstraction;
 using UI.Views.ViewComponents;
@@ -127,6 +128,7 @@ namespace UI.Views.Game
                 //Update can happen because timer is counting, but new move is needed to enter this block.
                 if (newSign != 0)
                 {
+                    AudioManager.PlaySound(AudioLibrarySounds.SignPlacement);
                     var signObject = Instantiate(newSign == 1 ? _xSignAsset : _oSignAsset, _cellButtons[newSignIndex].transform);
                     signObject.transform.localScale = new Vector3(2, 2, 2);
 
@@ -166,6 +168,7 @@ namespace UI.Views.Game
             try
             {
                 _gameData = null;
+                AudioManager.PlaySound(AudioLibrarySounds.Strike);
                 await ViewModel.StateMachine.TransitionTo(UIView.MatchOverScreen);
                 foreach (var cellButton in _cellButtons)
                 {

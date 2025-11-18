@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.brogrammist.jsam": "https://github.com/jackyyang09/Simple-Unity-Audio-Manager.git#master",
     "com.laicasaane.unity-addressables-manager": "https://github.com/laicasaane/unity-addressables-manager.git",
     "com.unity.2d.animation": "12.0.2",
     "com.unity.2d.aseprite": "2.0.2",
