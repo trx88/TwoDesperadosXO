@@ -28,7 +28,6 @@ namespace UI.Views.Game
         private ButtonViewComponent _cellButton6;
         private ButtonViewComponent _cellButton7;
         private ButtonViewComponent _cellButton8;
-        // private ButtonViewComponent _settingsButton;
         private ViewComponentHUD _viewComponentHUD;
         
         private List<ButtonViewComponent> _cellButtons;
@@ -52,18 +51,11 @@ namespace UI.Views.Game
                 
             _cellButtons = new List<ButtonViewComponent>();
             var list = GetViewComponents<ButtonViewComponent>();
-            for (var index = 0; index < list.Count; index++)
+            for (var index = 0; index < list.Count - 1; index++)
             {
-                if (index == list.Count - 1)
-                {
-                    // _settingsButton = list[index];
-                }
-                else
-                {
-                    var cellButton = list[index];
-                    _cellButtons.Add(cellButton);
-                    cellButton.SetInteractable(true);
-                }
+                var cellButton = list[index];
+                _cellButtons.Add(cellButton);
+                cellButton.SetInteractable(true);
             }
 
             ToggleBlocker(false);
