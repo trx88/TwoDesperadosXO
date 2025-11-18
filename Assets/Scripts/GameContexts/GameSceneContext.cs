@@ -11,7 +11,7 @@ namespace GameContexts
     {
         protected override async Task InitializeStateMachine()
         {
-            await UIStateMachine.SetInitialState(UIView.GameScreen);
+            await UIStateMachine.SetInitialState(UIView.HomeScreen);
         }
         
         protected override void CreateSceneViewModels()

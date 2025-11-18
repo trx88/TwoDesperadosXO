@@ -24,6 +24,9 @@ namespace UI.Views.ViewComponents
         {
             await base.Show();
             
+            //Since pop-ups are supported (Hide is not always called for all ViewComponents),
+            //need to ensure that only one listener is registered.
+            button.onClick.RemoveListener(OnButtonClicked);
             button.onClick.AddListener(OnButtonClicked);
         }
 

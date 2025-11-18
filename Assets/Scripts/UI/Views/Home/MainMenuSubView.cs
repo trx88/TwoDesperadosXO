@@ -76,7 +76,7 @@ namespace UI.Views.Home
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.SettingsScreen);
-                Debug.Log("Transition to UIView.StatsScreen");
+                Debug.Log("Transition to UIView.SettingsScreen");
             }
             catch (Exception e)
             {

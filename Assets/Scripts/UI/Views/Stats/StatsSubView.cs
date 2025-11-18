@@ -55,7 +55,7 @@ namespace UI.Views.Stats
             _statViewComponentPlayerOneWins.UpdateStatValue(statsData.PlayerOneWins.ToString());
             _statViewComponentPlayerTwoWins.UpdateStatValue(statsData.PlayerTwoWins.ToString());
             _statViewComponentDraws.UpdateStatValue(statsData.Draws.ToString());
-            _statViewComponentAverageMatchTime.UpdateStatValue($@"{statsData.AverageMatchTime} sec");
+            _statViewComponentAverageMatchTime.UpdateStatValue($@"{statsData.AverageMatchTime:F1} sec");
         }
         
         private async void OnCloseButtonClicked()

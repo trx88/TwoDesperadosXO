@@ -9,13 +9,6 @@ using UnityEngine;
 
 namespace UI.Views
 {
-    [Serializable]
-    public class ViewMap
-    {
-        public UIView viewType;
-        public ViewBase view;
-    }
-    
     /// <summary>
     /// Skeleton view class.
     /// </summary>

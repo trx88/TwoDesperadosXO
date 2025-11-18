@@ -12,6 +12,8 @@ namespace UI.Views.Game
 {
     public class GameSubView : View<GameViewModel>
     {
+        [SerializeField] private ButtonViewComponent settingsButton;
+        
         private ButtonViewComponent _cellButton0;
         private ButtonViewComponent _cellButton1;
         private ButtonViewComponent _cellButton2;
@@ -21,6 +23,7 @@ namespace UI.Views.Game
         private ButtonViewComponent _cellButton6;
         private ButtonViewComponent _cellButton7;
         private ButtonViewComponent _cellButton8;
+        // private ButtonViewComponent _settingsButton;
         private ViewComponentHUD _viewComponentHUD;
         
         private List<ButtonViewComponent> _cellButtons;
@@ -43,12 +46,21 @@ namespace UI.Views.Game
             _viewComponentHUD = GetViewComponent<ViewComponentHUD>();
                 
             _cellButtons = new List<ButtonViewComponent>();
-            foreach (var cellButton in GetViewComponents<ButtonViewComponent>())
+            var list = GetViewComponents<ButtonViewComponent>();
+            for (var index = 0; index < list.Count; index++)
             {
-                _cellButtons.Add(cellButton);
-                cellButton.SetInteractable(true);
+                if (index == list.Count - 1)
+                {
+                    // _settingsButton = list[index];
+                }
+                else
+                {
+                    var cellButton = list[index];
+                    _cellButtons.Add(cellButton);
+                    cellButton.SetInteractable(true);
+                }
             }
-                
+
             _gameData = null;
         }
 
@@ -86,6 +98,8 @@ namespace UI.Views.Game
         {
             base.SetupActionCallbacks();
 
+            settingsButton.ButtonClicked = OnSettingsButtonClick;
+            
             for (int index = 0; index < _cellButtons.Count; index++)
             {
                 int cellIndex = index;
@@ -126,6 +140,19 @@ namespace UI.Views.Game
             _viewComponentHUD?.UpdateData(gameData.PlayerOneMoves, gameData.PlayerTwoMoves, gameData.MatchTime);
             
             _gameData = gameData.Clone() as GameModel;
+        }
+        
+        private async void OnSettingsButtonClick()
+        {
+            try
+            {
+                await ViewModel.StateMachine.TransitionTo(UIView.SettingsScreen);
+                Debug.Log("Transition to UIView.SettingsScreen");
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
         
         private void OnCellButtonClicked(int index)

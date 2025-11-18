@@ -72,7 +72,7 @@ namespace UI.Views.Game
             try
             {
                 ViewModel.ResetGameData();
-                await ViewModel.StateMachine.TransitionTo(UIView.GameScreen);
+                await ViewModel.StateMachine.TransitionTo(UIView.HomeScreen);
             }
             catch (Exception e)
             {

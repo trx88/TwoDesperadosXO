@@ -771,7 +771,9 @@ MonoBehaviour:
   - {fileID: 2135913825}
   - {fileID: 1768753405}
   - {fileID: 842786002}
+  - {fileID: 893331729}
   - {fileID: 702094541}
+  settingsButton: {fileID: 893331729}
 --- !u!1 &189924424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,12 +1267,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.Manager.ViewStateContainer
   viewMap:
-  - viewType: 5
+  - viewType: 0
     view: {fileID: 170920453}
+    parent: {fileID: 0}
   - viewType: 1
     view: {fileID: 700065820}
+    parent: {fileID: 170920453}
   - viewType: 6
     view: {fileID: 1728657664}
+    parent: {fileID: 170920453}
 --- !u!4 &365259237
 Transform:
   m_ObjectHideFlags: 0

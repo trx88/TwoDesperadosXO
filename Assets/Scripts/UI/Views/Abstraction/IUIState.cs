@@ -9,7 +9,6 @@ namespace UI.Views.Abstraction
         StatsScreen,
         ThemeScreen,
         ExitScreen,
-        GameScreen,
         MatchOverScreen,
     }
     
