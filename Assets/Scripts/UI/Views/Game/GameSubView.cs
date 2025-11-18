@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UI.Models.Game;
+using UI.Views.Abstraction;
+using UI.Views.ViewComponents;
+using UI.ViewsModels.Game;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
+namespace UI.Views.Game
+{
+    public class GameSubView : View<GameViewModel>
+    {
+        private ButtonViewComponent _cellButton0;
+        private ButtonViewComponent _cellButton1;
+        private ButtonViewComponent _cellButton2;
+        private ButtonViewComponent _cellButton3;
+        private ButtonViewComponent _cellButton4;
+        private ButtonViewComponent _cellButton5;
+        private ButtonViewComponent _cellButton6;
+        private ButtonViewComponent _cellButton7;
+        private ButtonViewComponent _cellButton8;
+        private ViewComponentHUD _viewComponentHUD;
+        
+        private List<ButtonViewComponent> _cellButtons;
+        //Cache
+        private GameModel _gameData;
+        private GameObject _xSignAsset;
+        private GameObject _oSignAsset;
+        
+        private async Task LoadAssets()
+        {
+            _xSignAsset = await AddressablesManager.LoadAssetAsync<GameObject>(ViewModel.ThemeData.Value.XThemeAsset);
+            _oSignAsset = await AddressablesManager.LoadAssetAsync<GameObject>(ViewModel.ThemeData.Value.OThemeAsset);
+        }
+
+        protected override async void Initialize()
+        {
+            base.Initialize();
+            
+            //Get components
+            _viewComponentHUD = GetViewComponent<ViewComponentHUD>();
+                
+            _cellButtons = new List<ButtonViewComponent>();
+            foreach (var cellButton in GetViewComponents<ButtonViewComponent>())
+            {
+                _cellButtons.Add(cellButton);
+                cellButton.SetInteractable(true);
+            }
+                
+            _gameData = null;
+        }
+
+        protected override async void Finish()
+        {
+            try
+            {
+                base.Finish();
+            
+                //Additional initialization
+                await LoadAssets();
+                ViewModel.StartMatch();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+        }
+
+        protected override void Deinitialize()
+        {
+            AddressablesManager.ReleaseAsset(ViewModel.ThemeData.Value.XThemeAsset);
+            AddressablesManager.ReleaseAsset(ViewModel.ThemeData.Value.OThemeAsset);
+        }
+        
+        protected override void SetupDataBindings()
+        {
+            base.SetupDataBindings();
+            
+            //Proved actions to Bindables.
+            ViewModel.GameData.BindTo(OnGameDataChanged);
+        }
+        
+        protected override void SetupActionCallbacks()
+        {
+            base.SetupActionCallbacks();
+
+            for (int index = 0; index < _cellButtons.Count; index++)
+            {
+                int cellIndex = index;
+                _cellButtons[index].AddCustomListener(() => OnCellButtonClicked(cellIndex));
+            }
+        }
+        
+        private void OnGameDataChanged(GameModel gameData)
+        {
+            //Handle UI here after update
+            if (_gameData != null)
+            {
+                int newSignIndex = 0;
+                int newSign = 0;
+                for (int index = 0; index < _gameData.Board.Count; index++)
+                {
+                    if (_gameData.Board[index] != gameData.Board[index])
+                    {
+                        newSignIndex = index;
+                        newSign = gameData.Board[index];
+                        break;
+                    }
+                }
+
+                //Update can happen because timer is counting, but new move is needed to enter this block.
+                if (newSign != 0)
+                {
+                    var signObject = Instantiate(newSign == 1 ? _xSignAsset : _oSignAsset, _cellButtons[newSignIndex].transform);
+                    signObject.transform.localScale = new Vector3(2, 2, 2);
+
+                    if (gameData.MatchResult != GameOutcome.None)
+                    {
+                        MatchOver();
+                    }
+                }
+            }
+            
+            _viewComponentHUD?.UpdateData(gameData.PlayerOneMoves, gameData.PlayerTwoMoves, gameData.MatchTime);
+            
+            _gameData = gameData.Clone() as GameModel;
+        }
+        
+        private void OnCellButtonClicked(int index)
+        {
+            _cellButtons[index].SetInteractable(false);
+            ViewModel.CellClicked(index);
+        }
+
+        private async void MatchOver()
+        {
+            try
+            {
+                _gameData = null;
+                await ViewModel.StateMachine.TransitionTo(UIView.MatchOverScreen);
+                foreach (var cellButton in _cellButtons)
+                {
+                    cellButton.SetInteractable(true);
+                    
+                    if (cellButton.gameObject.transform.childCount > 1)
+                    {
+                        var image = cellButton.gameObject.transform.GetChild(1).gameObject;
+                        Destroy(image);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+        }
+    }
+}
