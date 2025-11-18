@@ -17,6 +17,7 @@ namespace UI.Views.Game
         [SerializeField] private ButtonViewComponent settingsButton;
         [SerializeField] private float cellSize = 300f;
         [SerializeField] private Image winningLineImage;
+        [SerializeField] private Image panelBlocker;
         
         private ButtonViewComponent _cellButton0;
         private ButtonViewComponent _cellButton1;
@@ -65,6 +66,7 @@ namespace UI.Views.Game
                 }
             }
 
+            ToggleBlocker(false);
             _gameData = null;
         }
 
@@ -171,11 +173,14 @@ namespace UI.Views.Game
             try
             {
                 _gameData = null;
+                ToggleBlocker(true);
                 AudioManager.PlaySound(AudioLibrarySounds.Strike);
+                
                 if (winningLine != null)
                 {
                     await AnimateWinningLine(winningLine);   
                 }
+                
                 await ViewModel.StateMachine.TransitionTo(UIView.MatchOverScreen);
                 
                 ResetUIElements();
@@ -200,16 +205,24 @@ namespace UI.Views.Game
             }
             winningLineImage.gameObject.SetActive(false);
             winningLineImage.fillAmount = 0f;
+            ToggleBlocker(false);
+        }
+
+        private void ToggleBlocker(bool toggle)
+        {
+            panelBlocker.enabled = toggle;
         }
 
         private async Task AnimateWinningLine(int[] winningLine)
         {
-            // private readonly int[][] _winLines =
-            // {
-            //     new []{0,1,2}, new []{3,4,5}, new []{6,7,8}, // rows
-            //     new []{0,3,6}, new []{1,4,7}, new []{2,5,8}, // cols
-            //     new []{0,4,8}, new []{2,4,6}                 // diagonals
-            // };
+            //ROWS -> [1]-[0] = 1
+            //[]{0,1,2}, {3,4,5}, {6,7,8}
+            
+            //COLUMNS -> [1]-[0] = 3
+            //{0,3,6}, {1,4,7}, {2,5,8}
+            
+            //DIAGONALS
+            //{0,4,8}[]{2,4,6}
             var cellTransform =  _cellButtons[winningLine[0]].GetComponent<RectTransform>();
             
             if (winningLine[1] - winningLine[0] == 1)
