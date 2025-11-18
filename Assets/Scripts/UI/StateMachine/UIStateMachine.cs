@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UI.Views.Abstraction;
+using UnityEngine;
 
 namespace UI.StateMachine
 {
@@ -70,6 +71,10 @@ namespace UI.StateMachine
                 }
                 //Contingency plan if TransitionTo is used improperly (jumping from states that are not connected).
                 //Hacky, but done to suppot SubView to act as a pop-up.
+            }
+            else
+            {
+                Debug.Log("ViewState not found");
             }
         }
     }

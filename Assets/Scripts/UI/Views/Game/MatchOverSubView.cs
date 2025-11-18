@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UI.Models.Game;
 using UI.Views.Abstraction;
@@ -14,6 +15,12 @@ namespace UI.Views.Game
         private ButtonViewComponent _buttonExit;
         [SerializeField] private TextMeshProUGUI textMatchResult;
         [SerializeField] private TextMeshProUGUI textMatchTime;
+        
+        public override async Task Show()
+        {
+            await Task.Delay(1000);
+            await base.Show();
+        }
         
         protected override void Initialize()
         {
