@@ -137,7 +137,7 @@ namespace UI.Views.Game
 
                     if (gameData.MatchResult != GameOutcome.None)
                     {
-                        MatchOver(newSignIndex, gameData.WinningLine);
+                        MatchOver(gameData.WinningLine);
                     }
                 }
             }
@@ -166,13 +166,16 @@ namespace UI.Views.Game
             ViewModel.CellClicked(index);
         }
 
-        private async void MatchOver(int lastPlayedIndex, int[] winningLine)
+        private async void MatchOver(int[] winningLine)
         {
             try
             {
                 _gameData = null;
                 AudioManager.PlaySound(AudioLibrarySounds.Strike);
-                await AnimateWinningLine(lastPlayedIndex, winningLine);
+                if (winningLine != null)
+                {
+                    await AnimateWinningLine(winningLine);   
+                }
                 await ViewModel.StateMachine.TransitionTo(UIView.MatchOverScreen);
                 
                 ResetUIElements();
@@ -199,7 +202,7 @@ namespace UI.Views.Game
             winningLineImage.fillAmount = 0f;
         }
 
-        private async Task AnimateWinningLine(int lastPlayedIndex, int[] winningLine)
+        private async Task AnimateWinningLine(int[] winningLine)
         {
             // private readonly int[][] _winLines =
             // {
