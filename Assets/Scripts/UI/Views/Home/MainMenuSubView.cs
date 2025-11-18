@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using JSAM;
+using UI.Models.Settings;
 using UI.Views.Abstraction;
 using UI.Views.ViewComponents;
 using UI.ViewsModels.Home;
@@ -13,6 +15,19 @@ namespace UI.Views.Home
         private ButtonViewComponent _statsButton;
         private ButtonViewComponent _exitButton;
         private ButtonViewComponent _settingButton;
+
+        public override async Task Show()
+        {
+            await base.Show();
+            await Task.Delay(1000);
+            if (!AudioManager.IsMusicPlaying(AudioLibraryMusic.BackgroundMusic))
+            {
+                AudioManager.PlayMusic(AudioLibraryMusic.BackgroundMusic);
+                
+                AudioManager.MainMusicHelper.AudioSource.volume = ViewModel.SettingsData.Value.MusicEnabled ? 0.4f : 0f;
+                AudioManager.InternalInstance.SoundMuted = !ViewModel.SettingsData.Value.SfxEnabled;
+            }
+        }
 
         protected override void Initialize()
         {
@@ -59,12 +74,12 @@ namespace UI.Views.Home
             }
         }
         
-        private void OnExitButtonClick()
+        private async void OnExitButtonClick()
         {
             try
             {
-                Debug.Log("Exit game");
-                // Application.Quit();
+                await ViewModel.StateMachine.TransitionTo(UIView.ExitScreen);
+                Debug.Log("Transition to UIView.ExitScreen");
             }
             catch (Exception e)
             {

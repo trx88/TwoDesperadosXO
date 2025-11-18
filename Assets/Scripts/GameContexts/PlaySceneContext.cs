@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Services;
 using UI.Views.Abstraction;
+using UI.ViewsModels.Exit;
 using UI.ViewsModels.Home;
 using UI.ViewsModels.Settings;
 using UI.ViewsModels.Stats;
@@ -21,6 +22,7 @@ namespace GameContexts
             RegisterViewModel(ViewModelFactory.Create<SettingViewModel>());
             RegisterViewModel(ViewModelFactory.Create<StatsViewModel>());
             RegisterViewModel(ViewModelFactory.Create<ThemeViewModel>());
+            RegisterViewModel(ViewModelFactory.Create<ExitViewModel>());
         }
 
         protected override void RegisterServices()

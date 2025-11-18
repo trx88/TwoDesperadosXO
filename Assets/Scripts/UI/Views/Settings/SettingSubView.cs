@@ -1,4 +1,5 @@
 using System;
+using JSAM;
 using UI.Models.Settings;
 using UI.Views.Abstraction;
 using UI.Views.ViewComponents;
@@ -53,6 +54,9 @@ namespace UI.Views.Settings
             //React to Bindable Action and update the UI elements.
             _toggleViewComponentMusic?.SetToggleValue(_settingsData.MusicEnabled);
             _toggleViewComponentSfx?.SetToggleValue(_settingsData.SfxEnabled);
+            
+            AudioManager.MainMusicHelper.AudioSource.volume = _settingsData.MusicEnabled ? 0.4f : 0f;
+            AudioManager.SoundMuted = !_settingsData.SfxEnabled;
         }
 
         private void OnMusicToggleValueChanged(bool value)
