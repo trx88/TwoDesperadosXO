@@ -27,6 +27,7 @@ namespace Actions.DataActions
                         0, 0, 0
                     },
                     MatchResult = GameOutcome.None,
+                    WinningLine = null,
                     MatchTime = 0,
                     PlayerOneMoves = 0,
                     PlayerTwoMoves = 0

@@ -19,7 +19,7 @@ namespace UI.Views.Game
         
         public override async Task Show()
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
             AudioManager.PlaySound(AudioLibrarySounds.Popup);
             await base.Show();
         }

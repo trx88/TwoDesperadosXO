@@ -57,7 +57,9 @@ namespace Services
             
             _gameData.Board[index] = _gameData.CurrentPlayer;
             _gameData.CurrentPlayer = _gameData.CurrentPlayer == 1 ? 2 : 1;
-            _gameData.MatchResult = CheckResult(_gameData.Board);
+            var matchResult = CheckResult(_gameData.Board);
+            _gameData.MatchResult = matchResult.Item1;
+            _gameData.WinningLine = matchResult.Item2;
             if (_gameData.MatchResult != GameOutcome.None)
             {
                 EndMatch(_gameData.MatchResult);
@@ -65,7 +67,7 @@ namespace Services
             _gameModelRepository.Update(_gameData);
         }
         
-        private GameOutcome CheckResult(List<int> board)
+        private (GameOutcome,int[]) CheckResult(List<int> board)
         {
             foreach (var line in _winLines)
             {
@@ -74,7 +76,7 @@ namespace Services
 
                 if (cell != 0 && cell == board[b] && cell == board[c])
                 {
-                    return cell == 1 ? GameOutcome.WinX : GameOutcome.WinO;
+                    return (cell == 1 ? GameOutcome.WinX : GameOutcome.WinO, line);
                 }
             }
             
@@ -90,10 +92,10 @@ namespace Services
 
             if (noEmpty)
             {
-                return GameOutcome.Draw;
+                return (GameOutcome.Draw, null);
             }
 
-            return GameOutcome.None;
+            return (GameOutcome.None, null);
         }
         
         public void StartMatch()
@@ -152,17 +154,6 @@ namespace Services
         private void ResetCacheData()
         {
             _totalMatchTime = 0f;
-            // _gameData.CurrentPlayer = 1;
-            // _gameData.Board = new List<int>()
-            // {
-            //     0, 0, 0,
-            //     0, 0, 0,
-            //     0, 0, 0
-            // };
-            // _gameData.MatchResult = GameOutcome.None;
-            // _gameData.MatchTime = 0;
-            // _gameData.PlayerOneMoves = 0;
-            // _gameData.PlayerTwoMoves = 0;
         }
     }
 }

@@ -8,12 +8,15 @@ using UI.Views.ViewComponents;
 using UI.ViewsModels.Game;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.UI;
 
 namespace UI.Views.Game
 {
     public class GameSubView : View<GameViewModel>
     {
         [SerializeField] private ButtonViewComponent settingsButton;
+        [SerializeField] private float cellSize = 300f;
+        [SerializeField] private Image winningLineImage;
         
         private ButtonViewComponent _cellButton0;
         private ButtonViewComponent _cellButton1;
@@ -134,7 +137,7 @@ namespace UI.Views.Game
 
                     if (gameData.MatchResult != GameOutcome.None)
                     {
-                        MatchOver();
+                        MatchOver(newSignIndex, gameData.WinningLine);
                     }
                 }
             }
@@ -163,27 +166,89 @@ namespace UI.Views.Game
             ViewModel.CellClicked(index);
         }
 
-        private async void MatchOver()
+        private async void MatchOver(int lastPlayedIndex, int[] winningLine)
         {
             try
             {
                 _gameData = null;
                 AudioManager.PlaySound(AudioLibrarySounds.Strike);
+                await AnimateWinningLine(lastPlayedIndex, winningLine);
                 await ViewModel.StateMachine.TransitionTo(UIView.MatchOverScreen);
-                foreach (var cellButton in _cellButtons)
-                {
-                    cellButton.SetInteractable(true);
-                    
-                    if (cellButton.gameObject.transform.childCount > 1)
-                    {
-                        var image = cellButton.gameObject.transform.GetChild(1).gameObject;
-                        Destroy(image);
-                    }
-                }
+                
+                ResetUIElements();
             }
             catch (Exception e)
             {
                 Debug.LogException(e);
+            }
+        }
+
+        private void ResetUIElements()
+        {
+            foreach (var cellButton in _cellButtons)
+            {
+                cellButton.SetInteractable(true);
+                    
+                if (cellButton.gameObject.transform.childCount > 1)
+                {
+                    var image = cellButton.gameObject.transform.GetChild(1).gameObject;
+                    Destroy(image);
+                }
+            }
+            winningLineImage.gameObject.SetActive(false);
+            winningLineImage.fillAmount = 0f;
+        }
+
+        private async Task AnimateWinningLine(int lastPlayedIndex, int[] winningLine)
+        {
+            // private readonly int[][] _winLines =
+            // {
+            //     new []{0,1,2}, new []{3,4,5}, new []{6,7,8}, // rows
+            //     new []{0,3,6}, new []{1,4,7}, new []{2,5,8}, // cols
+            //     new []{0,4,8}, new []{2,4,6}                 // diagonals
+            // };
+            var cellTransform =  _cellButtons[winningLine[0]].GetComponent<RectTransform>();
+            
+            if (winningLine[1] - winningLine[0] == 1)
+            {
+                //Rows
+                var newRectTransform = cellTransform.localPosition - new Vector3(cellSize / 2f, 0f, 0f);
+                winningLineImage.rectTransform.localPosition = newRectTransform;
+                winningLineImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                winningLineImage.gameObject.SetActive(true);
+            }
+            else if (winningLine[1] - winningLine[0] == 3)
+            {
+                //Columns
+                var newRectTransform = cellTransform.localPosition + new Vector3(0f, cellSize / 2f, 0f);
+                winningLineImage.rectTransform.localPosition = newRectTransform;
+                winningLineImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 270f);
+                winningLineImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                //Diagonals
+                var newRectTransform = cellTransform.localPosition + new Vector3(0f, 0f, 0f);
+                winningLineImage.rectTransform.localPosition = newRectTransform;
+                if (winningLine[0] == 0)
+                {
+                    //Top left to bottom right
+                    winningLineImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 315f);    
+                }
+                else
+                {
+                    //Top right to bottom left
+                    winningLineImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 225f);
+                }
+                winningLineImage.gameObject.SetActive(true);
+            }
+            
+            float currentFill = winningLineImage.fillAmount;
+            while (currentFill < 1f)
+            {
+                currentFill += 0.05f;
+                winningLineImage.fillAmount = currentFill;
+                await Task.Delay(1);
             }
         }
     }

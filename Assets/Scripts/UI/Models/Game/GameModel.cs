@@ -10,6 +10,7 @@ namespace UI.Models.Game
         [JsonProperty("currentPlayer")] public int CurrentPlayer { get; set; }
         [JsonProperty("board")] public List<int> Board { get; set; }
         [JsonProperty("matchResult")] public GameOutcome MatchResult { get; set; }
+        [JsonProperty("winningLine")] public int[] WinningLine { get; set; }
         [JsonProperty("matchTime")] public double MatchTime { get; set; }
         [JsonProperty("playerOneMoves")] public int PlayerOneMoves { get; set; }
         [JsonProperty("playerTwoMoves")] public int PlayerTwoMoves { get; set; }
@@ -23,6 +24,7 @@ namespace UI.Models.Game
                 CurrentPlayer =  CurrentPlayer,
                 Board = new List<int>(),
                 MatchResult = MatchResult,
+                WinningLine = null,
                 MatchTime = MatchTime,
                 PlayerOneMoves = PlayerOneMoves,
                 PlayerTwoMoves = PlayerTwoMoves,
