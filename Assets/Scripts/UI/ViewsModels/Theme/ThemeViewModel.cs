@@ -40,6 +40,7 @@ namespace UI.ViewsModels.Theme
             
             //Read the data from the repository and set the values.
             ThemeModel themeData = _themeModelRepository.Get(_ => true).Single();
+            
             SetThemeData(themeData);
         }
 

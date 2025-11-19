@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using JSAM;
 using UI.Models.Stats;
 using UI.Views.Abstraction;
 using UI.Views.ViewComponents;
@@ -15,6 +17,13 @@ namespace UI.Views.Stats
         private ViewComponentStat _statViewComponentDraws;
         private ViewComponentStat _statViewComponentAverageMatchTime;
         private ButtonViewComponent _closeButton;
+        
+        public override async Task Show()
+        {
+            await Task.Delay(200);
+            AudioManager.PlaySound(AudioLibrarySounds.Popup);
+            await base.Show();
+        }
         
         protected override void Initialize()
         {

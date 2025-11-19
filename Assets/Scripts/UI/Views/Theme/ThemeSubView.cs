@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using JSAM;
 using UI.Models.Theme;
 using UI.Views.ViewComponents;
 using UI.ViewsModels.Theme;
@@ -18,6 +20,13 @@ namespace UI.Views.Theme
         
         //Cache
         private ThemeModel _themeData;
+        
+        public override async Task Show()
+        {
+            await Task.Delay(200);
+            AudioManager.PlaySound(AudioLibrarySounds.Popup);
+            await base.Show();
+        }
         
         protected override void Initialize()
         {

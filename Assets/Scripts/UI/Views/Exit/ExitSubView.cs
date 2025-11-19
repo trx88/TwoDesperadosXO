@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using JSAM;
 using UI.Views.Abstraction;
 using UI.Views.ViewComponents;
 using UI.ViewsModels.Exit;
@@ -11,6 +13,13 @@ namespace UI.Views.Exit
     {
         private ButtonViewComponent _yesButton;
         private ButtonViewComponent _noButton;
+        
+        public override async Task Show()
+        {
+            await Task.Delay(200);
+            AudioManager.PlaySound(AudioLibrarySounds.Popup);
+            await base.Show();
+        }
         
         protected override void Initialize()
         {

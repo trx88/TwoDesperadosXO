@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using JSAM;
 using UI.Models.Settings;
 using UI.Views.Abstraction;
@@ -17,6 +18,13 @@ namespace UI.Views.Settings
         //Cache
         private SettingsModel _settingsData;
 
+        public override async Task Show()
+        {
+            await Task.Delay(200);
+            AudioManager.PlaySound(AudioLibrarySounds.Popup);
+            await base.Show();
+        }
+        
         protected override void Initialize()
         {
             base.Initialize();
