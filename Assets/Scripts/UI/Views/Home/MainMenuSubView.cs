@@ -53,7 +53,6 @@ namespace UI.Views.Home
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.ThemeScreen);
-                Debug.Log("Transition to UIView.GameScreen");
             }
             catch (Exception e)
             {
@@ -66,7 +65,6 @@ namespace UI.Views.Home
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.StatsScreen);
-                Debug.Log("Transition to UIView.StatsScreen");
             }
             catch (Exception e)
             {
@@ -79,7 +77,6 @@ namespace UI.Views.Home
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.ExitScreen);
-                Debug.Log("Transition to UIView.ExitScreen");
             }
             catch (Exception e)
             {
@@ -92,7 +89,6 @@ namespace UI.Views.Home
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.SettingsScreen);
-                Debug.Log("Transition to UIView.SettingsScreen");
             }
             catch (Exception e)
             {

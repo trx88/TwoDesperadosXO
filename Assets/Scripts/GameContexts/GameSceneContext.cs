@@ -23,10 +23,8 @@ namespace GameContexts
 
         protected override void RegisterServices()
         {
-            // Create counter
-            var counterService = new CounterService(0.1f); // 100ms
-
-            // Create runner and attach
+            var counterService = new CounterService(0.1f);
+            
             var runnerGO = new GameObject("CounterServiceRunner");
             var runner = runnerGO.AddComponent<CounterServiceRunner>();
             runner.Initialize(counterService);

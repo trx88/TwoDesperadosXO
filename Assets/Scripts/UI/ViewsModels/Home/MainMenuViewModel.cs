@@ -29,7 +29,6 @@ namespace UI.ViewsModels.Home
         {
             base.UpdateData();
             
-            //Read the data from the repository and set the values.
             SettingsModel settingsData = _settingsModelRepository.Get(_ => true).Single();
             SetSettingsData(settingsData);
         }

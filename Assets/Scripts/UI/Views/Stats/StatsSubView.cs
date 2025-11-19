@@ -37,7 +37,6 @@ namespace UI.Views.Stats
         {
             base.SetupDataBindings();
             
-            //Proved actions to Bindables.
             ViewModel.StatsData.BindTo(OnStatsDataChanged);
         }
         
@@ -50,7 +49,6 @@ namespace UI.Views.Stats
         
         private void OnStatsDataChanged(StatsModel statsData)
         {
-            //React to Bindable Action and update the UI elements.
             _statViewComponentNumberOfMatches.UpdateStatValue(statsData.NumberOfMatches.ToString());
             _statViewComponentPlayerOneWins.UpdateStatValue(statsData.PlayerOneWins.ToString());
             _statViewComponentPlayerTwoWins.UpdateStatValue(statsData.PlayerTwoWins.ToString());
@@ -63,7 +61,6 @@ namespace UI.Views.Stats
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.HomeScreen);
-                Debug.Log("Transition to UIView.HomeScreenView");
             }
             catch (Exception e)
             {

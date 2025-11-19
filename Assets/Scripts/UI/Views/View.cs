@@ -37,22 +37,22 @@ namespace UI.Views
 
         protected virtual void Deinitialize()
         {
-            //For what needs to happen when View is closed
+            //For what needs to happen when View is closed.
         }
 
         protected virtual void Finish()
         {
-            
+            //Any last-minute code that needs to be executed.
         }
         
         protected virtual void SetupDataBindings()
         {
-            //For base data binding. Good use case is localization.
+            //For base data binding. 
         }
 
         protected virtual void SetupActionCallbacks()
         {
-            
+            //Good use cases are Actions (so ViewComponents can communicate with the View).
         }
 
         protected void OnEnable()

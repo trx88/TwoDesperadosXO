@@ -10,7 +10,7 @@ namespace Services
         private readonly float _tickInterval;
         private Action<float> _onTick;
 
-        public bool IsRunning { get; private set; }
+        private bool _isRunning;
 
         public CounterService(float tickInterval = 0.1f)
         {
@@ -19,24 +19,19 @@ namespace Services
 
         public void StartCounter(Action<float> onTickCallback)
         {
-            if (IsRunning)
+            if (_isRunning)
             {
                 return;   
             }
             _onTick = onTickCallback;
             _elapsed = 0f;
             _totalElapsed = 0f;
-            IsRunning = true;
+            _isRunning = true;
         }
 
         public void StopCounter()
         {
-            IsRunning = false;
-        }
-
-        public void ResetCounter()
-        {
-            _elapsed = 0f;
+            _isRunning = false;
         }
 
         /// <summary>
@@ -44,7 +39,7 @@ namespace Services
         /// </summary>
         public void Tick(float deltaTime)
         {
-            if (!IsRunning) return;
+            if (!_isRunning) return;
 
             _elapsed += deltaTime;
             
@@ -53,8 +48,6 @@ namespace Services
                 //Get actual seconds
                 _totalElapsed += _tickInterval;
                 _onTick?.Invoke(_totalElapsed);
-                // _onTick?.Invoke(_totalElapsed * _tickInterval);
-                // _elapsed = 0f;
                 _elapsed -= _tickInterval;
             }
         }

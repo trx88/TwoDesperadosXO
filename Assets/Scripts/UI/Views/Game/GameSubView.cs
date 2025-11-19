@@ -31,6 +31,7 @@ namespace UI.Views.Game
         private ViewComponentHUD _viewComponentHUD;
         
         private List<ButtonViewComponent> _cellButtons;
+        
         //Cache
         private GameModel _gameData;
         private GameObject _xSignAsset;
@@ -42,7 +43,7 @@ namespace UI.Views.Game
             _oSignAsset = await AddressablesManager.LoadAssetAsync<GameObject>(ViewModel.ThemeData.Value.OThemeAsset);
         }
 
-        protected override async void Initialize()
+        protected override void Initialize()
         {
             base.Initialize();
             
@@ -88,7 +89,6 @@ namespace UI.Views.Game
         {
             base.SetupDataBindings();
             
-            //Proved actions to Bindables.
             ViewModel.GameData.BindTo(OnGameDataChanged);
         }
         
@@ -107,7 +107,6 @@ namespace UI.Views.Game
         
         private void OnGameDataChanged(GameModel gameData)
         {
-            //Handle UI here after update
             if (_gameData != null)
             {
                 int newSignIndex = 0;
@@ -146,7 +145,6 @@ namespace UI.Views.Game
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.SettingsScreen);
-                Debug.Log("Transition to UIView.SettingsScreen");
             }
             catch (Exception e)
             {

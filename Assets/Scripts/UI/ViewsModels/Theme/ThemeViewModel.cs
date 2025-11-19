@@ -48,7 +48,6 @@ namespace UI.ViewsModels.Theme
         /// </summary>
         public override void SubscribeToDataChanges()
         {
-            //TODO: Probably not needed
             base.SubscribeToDataChanges();
             
             _themeModelRepository.ItemChanged += OnThemeDataChanged;
@@ -59,7 +58,6 @@ namespace UI.ViewsModels.Theme
         /// </summary>
         public override void UnsubscribeFromDataChanges()
         {
-            //TODO: Probably not needed
             base.UnsubscribeFromDataChanges();
             
             _themeModelRepository.ItemChanged -= OnThemeDataChanged;
@@ -70,15 +68,6 @@ namespace UI.ViewsModels.Theme
         private void OnThemeDataChanged(ThemeModel themeData)
         {
             SetThemeData(themeData);
-            
-            //TODO: Load GameScene
-            if (themeData != null)
-            {
-                if (!string.IsNullOrEmpty(themeData.XThemeAsset) && !string.IsNullOrEmpty(themeData.OThemeAsset))
-                {
-                    Debug.Log("Load GameScene");
-                }
-            }
         }
         #endregion
         

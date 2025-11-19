@@ -34,7 +34,6 @@ namespace UI.Views.Settings
         {
             base.SetupDataBindings();
             
-            //Proved actions to Bindables.
             ViewModel.SettingsData.BindTo(OnSettingsDataChanged);
         }
 
@@ -51,7 +50,6 @@ namespace UI.Views.Settings
         {
             _settingsData = settingsData;
             
-            //React to Bindable Action and update the UI elements.
             _toggleViewComponentMusic?.SetToggleValue(_settingsData.MusicEnabled);
             _toggleViewComponentSfx?.SetToggleValue(_settingsData.SfxEnabled);
             
@@ -78,7 +76,6 @@ namespace UI.Views.Settings
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.HomeScreen);
-                Debug.Log("Transition to UIView.HomeScreenView");
             }
             catch (Exception e)
             {

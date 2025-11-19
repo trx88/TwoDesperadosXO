@@ -70,7 +70,7 @@ namespace UI.StateMachine
                     await _currentViewState.View.EnterViewState();
                 }
                 //Contingency plan if TransitionTo is used improperly (jumping from states that are not connected).
-                //Hacky, but done to suppot SubView to act as a pop-up.
+                //Hacky, but done to support SubView to act as a pop-up.
             }
             else
             {

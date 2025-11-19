@@ -41,7 +41,6 @@ namespace UI.ViewsModels.Stats
         /// </summary>
         public override void SubscribeToDataChanges()
         {
-            //TODO: Probably not needed
             base.SubscribeToDataChanges();
             
             _statsModelRepository.ItemChanged += OnSettingsDataChanged;
@@ -52,7 +51,6 @@ namespace UI.ViewsModels.Stats
         /// </summary>
         public override void UnsubscribeFromDataChanges()
         {
-            //TODO: Probably not needed
             base.UnsubscribeFromDataChanges();
             
             _statsModelRepository.ItemChanged -= OnSettingsDataChanged;
@@ -62,7 +60,6 @@ namespace UI.ViewsModels.Stats
         #region Repo callbacks
         private void OnSettingsDataChanged(StatsModel statsData)
         {
-            //TODO: Probably not needed
             SetStatsData(statsData);
         }
         #endregion

@@ -10,8 +10,11 @@ namespace UI.Views.Theme
 {
     public class ThemeSubView : View<ThemeViewModel>
     {
+        private ViewComponentToggle _toggleViewComponentTheme1;
+        private ViewComponentToggle _toggleViewComponentTheme2;
+        private ViewComponentToggle _toggleViewComponentTheme3;
         private ButtonViewComponent _playButton;
-        [SerializeField] private ToggleGroup _toggleGroup;
+        [SerializeField] private ToggleGroup toggleGroup;
         
         //Cache
         private ThemeModel _themeData;
@@ -20,18 +23,20 @@ namespace UI.Views.Theme
         {
             base.Initialize();
             
-            var viewComponents = GetViewComponents<ButtonViewComponent>();
+            var viewComponents = GetViewComponents<ViewComponentToggle>();
             if (viewComponents.Count > 0)
             {
-                _playButton = viewComponents[0];
+                _toggleViewComponentTheme1 = viewComponents[0];
+                _toggleViewComponentTheme2 = viewComponents[1];
+                _toggleViewComponentTheme3 = viewComponents[2];
             }
+            _playButton = GetViewComponent<ButtonViewComponent>();
         }
         
         protected override void SetupDataBindings()
         {
             base.SetupDataBindings();
             
-            //Proved actions to Bindables.
             ViewModel.ThemeData.BindTo(OnThemeDataChanged);
         }
         
@@ -39,7 +44,10 @@ namespace UI.Views.Theme
         {
             base.SetupActionCallbacks();
             
-            _playButton.ButtonClicked = OnCloseButtonClicked;
+            _playButton.ButtonClicked = OnPlayButtonClicked;
+            _toggleViewComponentTheme1.ToggleValueChanged = OnThemeOneToggleValueChanged;
+            _toggleViewComponentTheme2.ToggleValueChanged = OnThemeTwoToggleValueChanged;
+            _toggleViewComponentTheme3.ToggleValueChanged = OnThemeThreeToggleValueChanged;
         }
         
         private void OnThemeDataChanged(ThemeModel themeData)
@@ -47,41 +55,35 @@ namespace UI.Views.Theme
             _themeData = themeData;
         }
         
-        private void OnCloseButtonClicked()
+        private void OnThemeOneToggleValueChanged(bool value)
+        {
+            _themeData.XThemeAsset = ThemeAssetNames.SignXTheme1;
+            _themeData.OThemeAsset = ThemeAssetNames.SignOTheme1;
+            
+            ViewModel.UpdateTheme(_themeData);
+        }
+        
+        private void OnThemeTwoToggleValueChanged(bool value)
+        {
+            _themeData.XThemeAsset = ThemeAssetNames.SignXTheme2;
+            _themeData.OThemeAsset = ThemeAssetNames.SignOTheme2;
+            
+            ViewModel.UpdateTheme(_themeData);
+        }
+        
+        private void OnThemeThreeToggleValueChanged(bool value)
+        {
+            _themeData.XThemeAsset = ThemeAssetNames.SignXTheme3;
+            _themeData.OThemeAsset = ThemeAssetNames.SignOTheme3;
+            
+            ViewModel.UpdateTheme(_themeData);
+        }
+        
+        private void OnPlayButtonClicked()
         {
             try
             {
-                var toggle = _toggleGroup.ActiveToggles().First();
-
-                switch (toggle.GetComponent<ThemeToggle>().Theme)
-                {
-                    case ThemeType.Theme1:
-                    {
-                        _themeData.XThemeAsset = ThemeAssetNames.SignXTheme1;
-                        _themeData.OThemeAsset = ThemeAssetNames.SignOTheme1;
-                    }
-                        break;
-                    case ThemeType.Theme2:
-                    {
-                        _themeData.XThemeAsset = ThemeAssetNames.SignXTheme2;
-                        _themeData.OThemeAsset = ThemeAssetNames.SignOTheme2;
-                    }break;
-                    case ThemeType.Theme3:
-                    {
-                        _themeData.XThemeAsset = ThemeAssetNames.SignXTheme3;
-                        _themeData.OThemeAsset = ThemeAssetNames.SignOTheme3;
-                    }break;
-                    default:
-                    {
-                        _themeData.XThemeAsset = ThemeAssetNames.SignXTheme1;
-                        _themeData.OThemeAsset = ThemeAssetNames.SignOTheme1;
-                    }break;
-                }
-
-                ViewModel.UpdateTheme(_themeData);
-                
                 ViewModel.LoadGameScene();
-                Debug.Log("Transition to UIView.GameScreen");
             }
             catch (Exception e)
             {

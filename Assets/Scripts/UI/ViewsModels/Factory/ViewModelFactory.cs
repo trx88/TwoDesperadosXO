@@ -22,7 +22,6 @@ namespace UI.ViewsModels.Factory
         {
             var viewModel = new T();
             viewModel.Construct(_inMemoryRepoFactory, _playerPrefsRepositoryFactory, _stateMachine);
-            // vm.Construct(_stateMachine);
             return viewModel;
         }
     }

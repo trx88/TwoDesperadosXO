@@ -20,9 +20,12 @@ namespace Services
         
         private readonly int[][] _winLines =
         {
-            new []{0,1,2}, new []{3,4,5}, new []{6,7,8}, // rows
-            new []{0,3,6}, new []{1,4,7}, new []{2,5,8}, // cols
-            new []{0,4,8}, new []{2,4,6}                 // diagonals
+            //Rows
+            new []{0,1,2}, new []{3,4,5}, new []{6,7,8},
+            //Columns
+            new []{0,3,6}, new []{1,4,7}, new []{2,5,8},
+            //Diagonals
+            new []{0,4,8}, new []{2,4,6}
         };
         
         public MatchService(
@@ -34,9 +37,6 @@ namespace Services
             
             _gameModelRepository = inMemoryRepositoryFactory.RepositoryOf<GameModel>();
             _statsModelRepository = playerPrefsRepositoryFactory.RepositoryOf<StatsModel>();
-            
-            // _gameData = _gameModelRepository.Get(_ => true).Single();
-            // _statsModel = _statsModelRepository.Get(_ => true).Single();
         }
 
         public void HandleMove(int index)
@@ -57,13 +57,16 @@ namespace Services
             
             _gameData.Board[index] = _gameData.CurrentPlayer;
             _gameData.CurrentPlayer = _gameData.CurrentPlayer == 1 ? 2 : 1;
+            
             var matchResult = CheckResult(_gameData.Board);
             _gameData.MatchResult = matchResult.Item1;
             _gameData.WinningLine = matchResult.Item2;
+            
             if (_gameData.MatchResult != GameOutcome.None)
             {
                 EndMatch(_gameData.MatchResult);
             }
+            
             _gameModelRepository.Update(_gameData);
         }
         
@@ -109,7 +112,7 @@ namespace Services
             _counterService.StartCounter(OnTimerTick);
         }
 
-        public void EndMatch(GameOutcome gameOutcome)
+        private void EndMatch(GameOutcome gameOutcome)
         {
             _counterService.StopCounter();
             

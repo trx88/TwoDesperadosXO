@@ -28,7 +28,6 @@ namespace UI.Views.Game
         {
             base.Initialize();
             
-            //Get components
             var buttonComponents = GetViewComponents<ButtonViewComponent>();
             _buttonRetry = buttonComponents[0];
             _buttonExit = buttonComponents[1];
@@ -38,7 +37,6 @@ namespace UI.Views.Game
         {
             base.SetupDataBindings();
             
-            //Proved actions to Bindables.
             ViewModel.MatchResult.BindTo(OnMatchResultChanged);
             ViewModel.MatchTime.BindTo(OnMatchTimeChanged);
         }

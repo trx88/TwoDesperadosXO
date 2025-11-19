@@ -30,11 +30,4 @@ namespace UI.Models.Theme
         public const string SignXTheme3 = "SignX_Theme3";
         public const string SignOTheme3 = "SignO_Theme3";
     }
-
-    public enum ThemeType
-    {
-        Theme1,
-        Theme2,
-        Theme3,
-    }
 }

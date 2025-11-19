@@ -35,7 +35,7 @@ namespace UI.Views.Exit
             }
             else
             {
-                Application.Quit();                
+                Application.Quit();
             }
         }
         
@@ -44,7 +44,6 @@ namespace UI.Views.Exit
             try
             {
                 await ViewModel.StateMachine.TransitionTo(UIView.HomeScreen);
-                Debug.Log("Transition to UIView.HomeScreen");
             }
             catch (Exception e)
             {
