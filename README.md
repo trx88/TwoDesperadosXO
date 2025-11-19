@@ -39,5 +39,13 @@ ViewModel is where all the logic should live. ViewModel is tasked with getting t
 * <a href="https://github.com/laicasaane/unity-addressables-manager">AddressablesManager</a>
 * <a href="https://github.com/jackyyang09/Simple-Unity-Audio-Manager">AudioManager</a>
 
+## Notes
+Run the game from the PlayScene only to avoid the errors with AudioManager missing from the GameScene (it's DontDestroyOnLoad singleton, and it'll get there 😄).
+
+### Audio files missing
+If this happens, please rebuild the AudioLibrary shown in the screenshot.
+<img width="1427" height="1107" alt="image" src="https://github.com/user-attachments/assets/3c1b936a-1cab-47e1-a5a6-1489ff52f366" />
+
+
 ## Screenshot
 <img width="580" height="1256" alt="image" src="https://github.com/user-attachments/assets/5e2126a2-a818-4cfd-8481-358159169d42" />
