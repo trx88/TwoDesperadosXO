@@ -1,11 +1,5 @@
 # TwoDesperados Tic-Tac-Toe
-## Screenshot
-<img width="580" height="1256" alt="image" src="https://github.com/user-attachments/assets/5e2126a2-a818-4cfd-8481-358159169d42" />
-
-## 3rd party packages
-* <a href="https://github.com/applejag/Newtonsoft.Json-for-Unity">Newtonsoft Json</a>
-* <a href="https://github.com/laicasaane/unity-addressables-manager">AddressablesManager</a>
-* <a href="https://github.com/jackyyang09/Simple-Unity-Audio-Manager">AudioManager</a>
+Job application coding challenge
 # Code design & decisions
 This section describes the most important elements used in implementing the game.
 ## Game/Scene Context (Replacement for Zenject)
@@ -39,3 +33,11 @@ Model layer is already solved by using Repository. This implementation is not us
 Each View has a set of methods that are called on OnEnabled() that constructs the injected ViewModel, sets data bindings, sets action callbacks, initializes the UI elements and ViewComponents (repetative building blocks) and finalizes the View. View only reacts to data changes and handles UI logic (view transitions, setting the UI elements and animations).
 ### ViewModel
 ViewModel is where all the logic should live. ViewModel is tasked with getting the data, do any logic, and trigger the View to show the needed data. To help with this, a Bindable<T> was implemented. A Bindable binds to an Action provided by the View. When the Bindable data is set, provided Action is invoked triggering the View and notifying it what has changed. Actual UI elements are updated inside that callback method.
+
+## 3rd party packages
+* <a href="https://github.com/applejag/Newtonsoft.Json-for-Unity">Newtonsoft Json</a>
+* <a href="https://github.com/laicasaane/unity-addressables-manager">AddressablesManager</a>
+* <a href="https://github.com/jackyyang09/Simple-Unity-Audio-Manager">AudioManager</a>
+
+## Screenshot
+<img width="580" height="1256" alt="image" src="https://github.com/user-attachments/assets/5e2126a2-a818-4cfd-8481-358159169d42" />
