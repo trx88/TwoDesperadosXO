@@ -40,7 +40,7 @@ ViewModel is where all the logic should live. ViewModel is tasked with getting t
 * <a href="https://github.com/jackyyang09/Simple-Unity-Audio-Manager">AudioManager</a>
 
 ## Notes
-Run the game from the PlayScene only to avoid the errors with AudioManager missing from the GameScene (it's DontDestroyOnLoad singleton, and it'll get there 😄).
+Run the game from the PlayScene only to avoid the errors with AudioManager missing from the GameScene (it's a DontDestroyOnLoad singleton, so it'll get there 😄).
 
 ### Audio files missing
 If this happens, please rebuild the AudioLibrary shown in the screenshot.
