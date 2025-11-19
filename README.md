@@ -1,6 +1,7 @@
 # TwoDesperados Tic-Tac-Toe
 ## Screenshot
 <img width="580" height="1256" alt="image" src="https://github.com/user-attachments/assets/5e2126a2-a818-4cfd-8481-358159169d42" />
+
 ## 3rd party packages
 * <a href="https://github.com/applejag/Newtonsoft.Json-for-Unity">Newtonsoft Json</a>
 * <a href="https://github.com/laicasaane/unity-addressables-manager">AddressablesManager</a>
@@ -12,9 +13,9 @@ GameContext and SceneContext (inherited by PlaySceneContext and GameSceneContext
 
 ## Services
 A couple of services were implemented to help with the separation of concerns:
-MatchService - used to handle match logic outside of UI logic.
-CounterService - used to count the time for each match. It's run on a separate GameObject runner to keep the logic outside of MonoBehaviour.
-SceneService - used to switch between the scenes.
+* MatchService - used to handle match logic outside of UI logic.
+* CounterService - used to count the time for each match. It's run on a separate GameObject runner to keep the logic outside of MonoBehaviour.
+* SceneService - used to switch between the scenes.
 
 ## Repository
 ### Base Repository
